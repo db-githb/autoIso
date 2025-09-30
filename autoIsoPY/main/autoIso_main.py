@@ -24,6 +24,7 @@ from autoIsoUTILS.rich_utils import CONSOLE
 
 import time
 import shutil
+from typing import Optional
 from contextlib import contextmanager
 
 def _pct(n, d):  # safe percent string
@@ -59,6 +60,7 @@ class BaseIso:
 @dataclass
 class autoIso(BaseIso):
     """Cull using all images in the dataset."""
+    stat_thresh: Optional[float] = None 
     
     # main/driver function
     def run_iso(self):
@@ -73,7 +75,7 @@ class autoIso(BaseIso):
         # Phase 1 — statistical cull
         starting_total = pipeline.model.means.shape[0]
         with step(CONSOLE, "Phase 1 — Statistical cull", emoji=":broom:"):
-            cull_mask = statcull_mahalanobis(pipeline)
+            cull_mask = statcull_mahalanobis(pipeline, self.stat_thresh)
             keep = ~cull_mask
             pipeline.model = modify_model(pipeline.model, keep)
             statcull_total = pipeline.model.means.shape[0]
