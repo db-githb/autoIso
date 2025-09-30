@@ -193,7 +193,7 @@ def get_mask_dir(config):
         mask_dir = root / "masks"
     return mask_dir
 
-def statcull_mahalanobis(pipeline, threshold=0.2):
+def statcull_mahalanobis(pipeline, threshold=0.5):
     means3D = pipeline.model.means.to("cpu")
     center = means3D.median(dim=0).values
     std_dev = means3D.std(dim=0)
