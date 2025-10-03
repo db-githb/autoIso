@@ -15,12 +15,10 @@ def main():
                         help="path to 3DGS model's yaml configuration file")
     p_cull.add_argument("--output-dir", "-o", default=None,
                         help="Path to output directory")
-    p_cull.add_argument("--stat-thresh", "-s", type=float, default=0.5,
-                        help="Cull Gaussians whose distance from the scene’s median center exceeds this value, measured in per-axis standard deviations")
-
+    
     args = parser.parse_args()
     if args.command == "isolate-car":
-        dc = autoIso(Path(args.load_config), output_dir=args.output_dir, stat_thresh=args.stat_thresh)
+        dc = autoIso(Path(args.load_config), output_dir=args.output_dir)
         dc.run_iso()
 
 with torch.inference_mode():

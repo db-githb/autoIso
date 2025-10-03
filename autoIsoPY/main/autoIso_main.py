@@ -13,10 +13,10 @@ from autoIsoPY.main.utils_main import (
     write_ply,
     load_config, 
     render_loop,
-    run_mask_processing)
+    )
 
 from autoIsoPY.main.utils_autoIso import (
-    statcull_mahalanobis, 
+    statcull_anisotropic, 
     modify_model,
 )
 
@@ -75,7 +75,7 @@ class autoIso(BaseIso):
         # Phase 1 — statistical cull
         starting_total = pipeline.model.means.shape[0]
         with step(CONSOLE, "Phase 1 — Statistical cull", emoji=":broom:"):
-            cull_mask = statcull_mahalanobis(pipeline, self.stat_thresh)
+            cull_mask = statcull_anisotropic(pipeline)
             keep = ~cull_mask
             pipeline.model = modify_model(pipeline.model, keep)
             statcull_total = pipeline.model.means.shape[0]
