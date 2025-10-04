@@ -19,29 +19,25 @@ Using these masks, you can then train a new 3DGS model that contains only the ca
 
 ### 1. Create & activate the Conda environment
 ```bash
-conda create -n autoIso python
-conda activate autoIso
+conda create -n autoiso python=3.11.9
+conda activate autoiso
 ```
+
 ### 2. Install dependencies
-
 ```bash
-# Change directories to project root (gCull/):
-cd <project-dir: autoIso>
-
-# Install SAM2, & CLIP
-# This will also install a CUDA-enabled version of PyTorch (based on pip defaults)
+conda install -y -c nvidia --strict-channel-priority   cuda-toolkit=11.8 cuda-nvcc=11.8
+pip install torch==2.6.0+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
+pip install gsplat==0.1.11
 pip install -r requirements.txt
-
-# Install the autoIso package and its CLI entrypoints:
 pip install .
 ```
 
-### 3. Download SAM2 weights for semantic masks
+### 3. Install SAM2 weights for semantic masks
 ```bash
 cd ..  # Return to project root
 mkdir -p models
 wget https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_large.pt -P models
-```
+``````
 
 ## 📂 File Structure (Input Layout)
 
