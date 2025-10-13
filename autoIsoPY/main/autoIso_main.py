@@ -89,6 +89,6 @@ class autoIso(BaseIso):
         # Phase 3 — car mask (keep car)
         with step(CONSOLE, "Phase 3 — Apply car mask (keep car)", emoji=":car:"):
             mp = MaskProcessor(Path(render_dir), "car")
-            mask_dir = mp.run_mask_processing(0.9, 0.25)
-            shutil.rmtree(render_dir)  # delete renders
+            mask_dir = mp.run_mask_processing(0.5, 0.25)
+            #shutil.rmtree(render_dir)  # delete renders
             CONSOLE.print(f"• Saved masks to: {mask_dir}")

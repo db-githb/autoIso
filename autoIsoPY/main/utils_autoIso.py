@@ -205,7 +205,7 @@ def statcull_mahalanobis(pipeline, threshold=0.5):
     cull_mask = mahalanobis_distance > threshold
     return cull_mask
 
-def statcull_anisotropic(pipeline, radii=(0.2, 0.2, 0.6), use_median=True, eps=1e-8):
+def statcull_anisotropic(pipeline, radii=(0.5, 0.5, 1.0), use_median=True, eps=1e-8):
     """
     Cull Gaussians outside an ellipsoid defined by per-axis radii (in z-score units).
     radii: (rx, ry, rz) — e.g., 0.3 for x/y and 0.6 for z to be more lenient on z.
